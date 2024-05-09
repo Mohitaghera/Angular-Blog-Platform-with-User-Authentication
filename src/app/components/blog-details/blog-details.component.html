@@ -1,0 +1,14 @@
+<div class="blog-details">
+  <header>
+    <h1>{{ blog.title }}</h1>
+    <p>Category: {{ blog.category }}</p>
+  </header>
+
+  <img [src]="blog.photo_url" alt="Blog Image">
+
+  <section>
+    <p>{{ blog.content_text }}</p>
+    <p>Description: {{ blog.description }}</p>
+  </section>
+</div>
+

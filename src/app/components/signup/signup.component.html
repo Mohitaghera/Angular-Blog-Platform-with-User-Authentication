@@ -1,0 +1,162 @@
+<div class="container">
+  <h2>Sign Up</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>First Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="firstName"
+        [ngClass]="{
+          error:
+            signupForm.get('firstName')?.invalid &&
+            signupForm.get('firstName')?.touched
+        }"
+      />
+      <div
+        *ngIf="signupForm.get('firstName')?.errors?.['required'] && signupForm.get('firstName')?.touched"
+        class="text-danger"
+      >
+        First name is required
+      </div>
+      <div
+        *ngIf="signupForm.get('firstName')?.errors?.['pattern'] && signupForm.get('firstName')?.touched"
+        class="text-danger"
+      >
+        First name must be alphanumeric
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Last Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="lastName"
+        [ngClass]="{
+          error:
+            signupForm.get('lastName')?.invalid &&
+            signupForm.get('lastName')?.touched
+        }"
+      />
+      <div
+        *ngIf="signupForm.get('lastName')?.errors?.['required'] && signupForm.get('lastName')?.touched"
+        class="text-danger"
+      >
+        Last name is required
+      </div>
+      <div
+        *ngIf="signupForm.get('lastName')?.errors?.['pattern'] && signupForm.get('lastName')?.touched"
+        class="text-danger"
+      >
+        Last name must be alphanumeric
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email:</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        [ngClass]="{
+          error:
+            signupForm.get('email')?.invalid && signupForm.get('email')?.touched
+        }"
+      />
+      <div
+        *ngIf="signupForm.get('email')?.errors?.['required'] && signupForm.get('email')?.touched"
+        class="text-danger"
+      >
+        Email is required
+      </div>
+      <div
+        *ngIf="signupForm.get('email')?.errors?.['email'] && signupForm.get('email')?.touched"
+        class="text-danger"
+      >
+        Please enter valid Email
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Password:</label>
+      <div class="input-group password-input">
+        <input
+          type="{{ showPassword1 ? 'text' : 'password' }}"
+          class="form-control "
+          formControlName="password"
+          [ngClass]="{
+            error:
+              signupForm.get('password')?.invalid &&
+              signupForm.get('password')?.touched
+          }"
+        />
+        <div class="input-group-append eye-icon icon1" (click)="togglePassword('password1')">
+          <span class="" *ngIf="showPassword1">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+          </span>
+          <span class="" *ngIf="!showPassword1">
+            <i class="fa fa-eye-slash" aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>
+      <div
+        *ngIf="signupForm.get('password')?.errors?.['required'] && signupForm.get('password')?.touched"
+        class="text-danger"
+      >
+        Password is required.
+      </div>
+      <div
+        *ngIf="signupForm.get('password')?.errors?.['minlength'] && signupForm.get('password')?.touched"
+        class="text-danger"
+      >
+        Password must be at least 8 characters.
+      </div>
+    </div>
+    <div class="form-group" >
+      <label>Confirm Password:</label>
+      <div class="input-group password-input">
+      <input
+      type="{{ showPassword2 ? 'text' : 'password' }}"
+      class="form-control "
+        formControlName="confirmPassword"
+        [ngClass]="{
+          error:
+            (signupForm.get('confirmPassword')?.invalid ||
+              signupForm.get('confirmPassword')?.value !==
+                signupForm.get('password')?.value) &&
+            signupForm.get('confirmPassword')?.touched
+        }"
+      />
+      <div class="input-group-append eye-icon icon2" (click)="togglePassword('password2')">
+        <span class="" *ngIf="showPassword2">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+        </span>
+        <span class="" *ngIf="!showPassword2">
+          <i class="fa fa-eye-slash" aria-hidden="true"></i>
+        </span>
+      </div>
+      </div>
+      <div
+        *ngIf="signupForm.get('confirmPassword')?.errors?.['required'] && signupForm.get('confirmPassword')?.touched"
+        class="text-danger"
+      >
+        Confirm Password is required
+      </div>
+      <div
+        *ngIf="
+          signupForm.get('confirmPassword')?.value !==
+            signupForm.get('password')?.value &&
+          signupForm.get('confirmPassword')?.touched && !signupForm.get('confirmPassword')?.errors?.['required']
+        "
+        class="text-danger"
+      >
+        Passwords do not match
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="!signupForm.valid"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>
