@@ -7,6 +7,7 @@
         type="text"
         class="form-control"
         formControlName="firstName"
+        maxlength="50"
         [ngClass]="{
           error:
             signupForm.get('firstName')?.invalid &&
@@ -32,6 +33,7 @@
         type="text"
         class="form-control"
         formControlName="lastName"
+        maxlength="50"
         [ngClass]="{
           error:
             signupForm.get('lastName')?.invalid &&
@@ -154,7 +156,8 @@
     <button
       type="submit"
       class="btn btn-primary"
-      [disabled]="!signupForm.valid"
+      [disabled]="!signupForm.valid || signupForm.get('confirmPassword')?.value !==
+      signupForm.get('password')?.value"
     >
       Sign Up
     </button>

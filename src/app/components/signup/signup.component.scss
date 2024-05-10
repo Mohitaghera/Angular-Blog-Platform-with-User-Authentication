@@ -77,3 +77,13 @@ label {
 .error {
   border: 1px solid red !important;
 }
+
+@media only screen and (max-width:550px){
+  .container{
+    max-width: 90%;
+    margin: 50px auto;
+  }
+  .text-danger{
+    font-size: 12px !important;
+  }
+}

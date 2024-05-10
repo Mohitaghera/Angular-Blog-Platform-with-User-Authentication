@@ -1,9 +1,15 @@
-<div class="container">
+<div class="main">
+<div class="hero">
   <h2>Welcome to our Blog Application!</h2>
   <div class="links">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/signup">Signup</a>
     <a routerLink="/blog-list">Blog List</a>
-    <a routerLink="/blog-details/:id">Blog Details (Sample)</a>
+    <ng-container *ngIf="!isLogged; else loggedInLinks">
+      <a routerLink="/signup">Signup</a>
+      <a routerLink="/login">Login</a>
+    </ng-container>
+    <ng-template #loggedInLinks>
+      <a (click)="logout()">Logout</a>
+    </ng-template>
   </div>
+</div>
 </div>

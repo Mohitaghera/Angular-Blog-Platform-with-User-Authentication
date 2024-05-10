@@ -1,4 +1,7 @@
 <div class="container">
+  <div *ngIf="showAlert" class="alert" [ngClass]="{ 'alert-success': loginSuccess, 'alert-danger': !loginSuccess }" >
+    {{ alertMessage }}
+  </div>
   <h2>Login</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">

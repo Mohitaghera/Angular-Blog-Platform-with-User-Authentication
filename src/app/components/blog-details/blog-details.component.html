@@ -1,4 +1,8 @@
-<div class="blog-details">
+<div class="loader" *ngIf="isLoading">
+  <div class="spinner"></div>
+</div>
+<div class="blog-details" *ngIf="!isLoading">
+ 
   <header>
     <h1>{{ blog.title }}</h1>
     <p>Category: {{ blog.category }}</p>
@@ -10,5 +14,6 @@
     <p>{{ blog.content_text }}</p>
     <p>Description: {{ blog.description }}</p>
   </section>
+
 </div>
 

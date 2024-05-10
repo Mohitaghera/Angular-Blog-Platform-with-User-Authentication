@@ -2,7 +2,7 @@
   <h2>Blog List</h2>
   <div class="row">
     <div class="col-lg-4 col-md-6 col-sm-12 blog" *ngFor="let blog of blogs">
-      <div class="card mb-3">
+      <div class="card mb-3" (click)="onBlogDetail(blog.id)">
         <img class="card-img-top" [src]="blog.photo_url" alt="{{ blog.title }}">
         <div class="card-body">
           <h5 class="card-title">{{ blog.title }}</h5>
@@ -11,5 +11,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="loader" *ngIf="isLoading">
+    <div class="spinner"></div>
   </div>
 </div>
