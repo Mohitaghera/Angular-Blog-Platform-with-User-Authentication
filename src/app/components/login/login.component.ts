@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit{
 
 
   ngOnInit() {
-
+    this.initLocalStorage();
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]) ,
       password: new FormControl('', [Validators.required]) 
@@ -60,6 +60,20 @@ export class LoginComponent implements OnInit{
   onReset() {
     this.loginForm.reset();
   }
+  initLocalStorage() {
+    if (!localStorage.getItem('userdata')) {
+      const initialUser = {
+        firstName: 'John',
+        lastName: 'Doe',
+        email: 'john.doe@example.email',
+        password: 'John@1234'
+      };
+  
+      localStorage.setItem('userdata', JSON.stringify([initialUser]));
+      localStorage.setItem('userId', '1');
+    }
+  }
+  
 
   showAlertMessage(success: boolean, message: string) {
     this.loginSuccess = success;
