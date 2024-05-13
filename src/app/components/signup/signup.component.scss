@@ -77,6 +77,19 @@ label {
 .error {
   border: 1px solid red !important;
 }
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
 
 @media only screen and (max-width:550px){
   .container{
@@ -85,5 +98,16 @@ label {
   }
   .text-danger{
     font-size: 12px !important;
+  }
+}
+@media only screen and (max-width:400px){
+    .form-group{
+    margin-bottom: 10px !important;
+  }
+  .form-control,.btn-primary{
+    padding: 6px !important;
+  }
+  label{
+    margin-bottom: 2px !important;
   }
 }

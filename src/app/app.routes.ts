@@ -3,7 +3,6 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { BlogDetailsComponent } from './components/blog-details/blog-details.component';
-import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
@@ -17,5 +16,5 @@ export const routes: Routes = [
       { path: ':id', component: BlogDetailsComponent,canActivate: [AuthGuard] },
     ],
   },
-  { path: '**', redirectTo: '' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];

@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
-import { AuthStateService } from './auth-state.service';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn:boolean = false
 
-  constructor(private authStateService: AuthStateService) {}
+  private logoutTimeout: ReturnType<typeof setTimeout> | null = null;
+
+constructor(private router:Router){}
 
   login() {
-    this.isLoggedIn = true
-    this.authStateService.setLoggedIn(true);
-
     const token = 'asdfghjkl1234567890';
     localStorage.setItem('authToken', token);
+
+    this.logoutTimeout = setTimeout(() => {
+      this.logout();
+    }, 1000 * 60 * 10);
   }
 
-  logout() {  
-    this.isLoggedIn = false
+  logout() {
+    if (this.logoutTimeout) {
+      clearTimeout(this.logoutTimeout);
+    }
+    
     localStorage.removeItem('authToken');
-    this.authStateService.setLoggedIn(false);
+    this.router.navigate(['/login']);
+
   }
   getToken(): string | null {
     return localStorage.getItem('authToken');

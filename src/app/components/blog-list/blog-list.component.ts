@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogService } from '../../services/blog.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -19,20 +20,21 @@ export class BlogListComponent implements OnInit, OnDestroy {
   blogSub!:Subscription;
   isLoading :boolean = false;
 
-  constructor(private blogService: BlogService, private router : Router) {}
+  constructor(private blogService: BlogService, private router : Router,private authService:AuthService) {}
 
   ngOnInit() {
     this.isLoading = true;
     this.blogSub = this.blogService.getBlogList()
       .subscribe((data: any)=> {
-        console.log(data.blogs);
 
         this.blogs = data.blogs;
         this.isLoading = false;
-      });
-    
-    
+      }); 
   }
+  logout(): void {
+    this.authService.logout(); 
+  }
+
   onBlogDetail(blogId: number) {
     this.router.navigate(['/blog-list', blogId]);
   }

@@ -1,6 +1,9 @@
 <div class="loader" *ngIf="isLoading">
   <div class="spinner"></div>
 </div>
+<div *ngIf="!isLoading">
+  <button class="btn btn-primary btn-logout" (click)="logout()">Logout</button>
+
 <div class="blog-details" *ngIf="!isLoading">
  
   <header>
@@ -15,5 +18,6 @@
     <p>Description: {{ blog.description }}</p>
   </section>
 
+</div>
 </div>
 

@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
     localStorage.setItem('userdata', JSON.stringify(existingData));
     localStorage.setItem('userId', this.userId.toString());
 
-    this.router.navigate(['']);
+    this.router.navigate(['/blog-list']);
 
     this.onReset();
     this.showPassword1 = false;

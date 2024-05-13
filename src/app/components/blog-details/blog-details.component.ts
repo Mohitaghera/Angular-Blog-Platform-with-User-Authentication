@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../../services/blog.service';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-blog-details',
@@ -17,18 +18,20 @@ export class BlogDetailsComponent implements OnInit,OnDestroy {
   blogSub!:Subscription;
 
 
-  constructor(private route: ActivatedRoute, private blogService: BlogService) {}
+  constructor(private route: ActivatedRoute,private router:Router, private blogService: BlogService,private authService:AuthService) {}
 
   ngOnInit() {
     this.isLoading = true;
     const blogId = Number(this.route.snapshot.paramMap.get('id'));
     this.blogSub =  this.blogService.getBlogDetails(blogId)
       .subscribe((data:any) => {
-        console.log(data.blog);
         
         this.blog = data.blog;
         this.isLoading = false;
       });
+  }
+  logout(): void {
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {

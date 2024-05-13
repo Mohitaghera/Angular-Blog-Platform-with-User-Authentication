@@ -82,7 +82,7 @@
       <div class="input-group password-input">
         <input
           type="{{ showPassword1 ? 'text' : 'password' }}"
-          class="form-control "
+          class="form-control password-input"
           formControlName="password"
           [ngClass]="{
             error:
@@ -117,7 +117,7 @@
       <div class="input-group password-input">
       <input
       type="{{ showPassword2 ? 'text' : 'password' }}"
-      class="form-control "
+      class="form-control password-input"
         formControlName="confirmPassword"
         [ngClass]="{
           error:
@@ -162,4 +162,5 @@
       Sign Up
     </button>
   </form>
+  <p class="login-link">Already have an account? <a href="/login">Login</a></p>
 </div>
