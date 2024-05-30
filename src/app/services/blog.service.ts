@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +12,19 @@ export class BlogService {
   constructor(private http: HttpClient) {}
 
   getBlogList(): Observable<any[]> {
-    return this.http.get<any[]>(this.blogListUrl);
+    return this.http.get<any[]>(this.blogListUrl).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError('Failed to fetch blog list. ' + error.message);
+      })
+    );
   }
 
   getBlogDetails(blogId: number): Observable<any> {
-    
-    return this.http
-      .get<any>(`${this.blogListUrl}${blogId}
-    `);
+    const url = `${this.blogListUrl}${blogId}`;
+    return this.http.get<any>(url).pipe(
+      catchError((error: HttpErrorResponse) => {
+        return throwError('Failed to fetch blog details. ' + error.message);
+      })
+    );
   }
 }

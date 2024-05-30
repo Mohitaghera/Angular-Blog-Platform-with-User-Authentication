@@ -5,10 +5,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-
   private logoutTimeout: ReturnType<typeof setTimeout> | null = null;
 
-constructor(private router:Router){}
+  constructor(private router: Router) {}
 
   login() {
     const token = 'asdfghjkl1234567890';
@@ -23,10 +22,9 @@ constructor(private router:Router){}
     if (this.logoutTimeout) {
       clearTimeout(this.logoutTimeout);
     }
-    
+
     localStorage.removeItem('authToken');
     this.router.navigate(['/login']);
-
   }
   getToken(): string | null {
     return localStorage.getItem('authToken');

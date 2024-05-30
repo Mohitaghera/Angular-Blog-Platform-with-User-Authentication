@@ -4,35 +4,36 @@ import { BlogService } from '../../services/blog.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
+import { LoaderComponent } from '../../loader/loader.component';
 
 @Component({
   selector: 'app-blog-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,LoaderComponent],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
-  providers:[BlogService]
-
+  providers: [BlogService],
 })
 export class BlogListComponent implements OnInit, OnDestroy {
   blogs: any[] = [];
-  blogSub!:Subscription;
-  isLoading :boolean = false;
+  blogSub!: Subscription;
+  isLoading: boolean = false;
 
-  constructor(private blogService: BlogService, private router : Router,private authService:AuthService) {}
+  constructor(
+    private blogService: BlogService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.isLoading = true;
-    this.blogSub = this.blogService.getBlogList()
-      .subscribe((data: any)=> {
-
-        this.blogs = data.blogs;
-        this.isLoading = false;
-      }); 
+    this.blogSub = this.blogService.getBlogList().subscribe((data: any) => {
+      this.blogs = data.blogs;
+      this.isLoading = false;
+    });
   }
   logout(): void {
-    this.authService.logout(); 
+    this.authService.logout();
   }
 
   onBlogDetail(blogId: number) {
@@ -40,6 +41,6 @@ export class BlogListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.blogSub.unsubscribe();
+    this.blogSub.unsubscribe();
   }
 }
